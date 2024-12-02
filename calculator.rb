@@ -24,10 +24,6 @@ class StringCalculator
     string.gsub('\n', delimiter).split(delimiter).map(&:to_i)
   end
 
-  def negative_numbers(string, delimiter = ',')
-    string_integers(string, delimiter).select { |num| num < 0 }
-  end
-
   def validates_negative_numbers(numbers)
     negatives = numbers.select { |num| num < 0 }
     raise ArgumentError, "negative numbers not allowed #{negatives.join(',')}" if negatives.any?
