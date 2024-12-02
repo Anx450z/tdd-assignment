@@ -1,5 +1,12 @@
 require 'rspec'
+require_relative 'calculator'
 
-Rspec.describe StringCalculator do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe StringCalculator do
+  let(:calculator) { StringCalculator.new }
+
+  describe 'add' do
+    it 'returns 0 if string is empty' do 
+      expect(calculator.add('')).to eq(0)
+    end
+  end
 end
