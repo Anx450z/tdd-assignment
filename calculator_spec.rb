@@ -12,5 +12,9 @@ RSpec.describe StringCalculator do
     it 'should return single number if string is a number' do
       expect(calculator.add('1')).to eq(1)
     end
+
+    it 'should return single number if there is a comma' do
+      expect(calculator.add('2,')).to eq(2)
+    end
   end
 end
