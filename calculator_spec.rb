@@ -48,5 +48,10 @@ RSpec.describe StringCalculator do
     it 'should support different delimiters' do
       expect(calculator.add('//;\n1;2;4;5;6;;')).to eq(18)
     end
+    ['*','&','^',';','~','.'].each do |delimiter|
+      it "should support different delimiters #{delimiter}" do
+        expect(calculator.add("//#{delimiter}\n1#{delimiter}2#{delimiter}4#{delimiter}#{delimiter}")).to eq(7)
+      end
+    end
   end
 end
