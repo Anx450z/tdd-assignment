@@ -40,5 +40,13 @@ RSpec.describe StringCalculator do
     it 'should handle any number of integers with new lines and commas' do
       expect(calculator.add('1\n2,3,\n')).to eq(6)
     end
+
+    it 'should support different delimiters' do
+      expect(calculator.add('//;\n1;2')).to eq(3)
+    end
+
+    it 'should support different delimiters' do
+      expect(calculator.add('//;\n1;2;4;5;6;;')).to eq(18)
+    end
   end
 end
