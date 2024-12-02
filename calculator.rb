@@ -3,8 +3,8 @@ class StringCalculator
     return 0 if  string.nil? || string.empty?
     
     answer = if string.start_with?('//')
-                delimiter = string[2]
-                numbers = string.split('\n').last
+                delimiter_part, numbers = string.split("\n",2)
+                delimiter = delimiter_part[2]
                 sum_of_numbers(numbers, delimiter)
               else
                 sum_of_numbers(string)
@@ -21,7 +21,7 @@ class StringCalculator
   end
 
   def string_integers(string, delimiter = ',')
-    string.gsub('\n', delimiter).split(delimiter).map(&:to_i)
+    string.gsub("\n", delimiter).split(delimiter).map(&:to_i)
   end
 
   def validates_negative_numbers(numbers)

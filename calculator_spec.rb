@@ -19,69 +19,67 @@ RSpec.describe StringCalculator do
       end
   
       it 'should return single number if there is a comma' do
-        expect(calculator.add('2,')).to eq(2)
+        expect(calculator.add("2,")).to eq(2)
       end
   
       it 'should return sum of numbers if there are multiple numbers' do
-        expect(calculator.add('1,2')).to eq(3)
+        expect(calculator.add("1,2")).to eq(3)
       end
   
       it 'should return sum of numbers if there are multiple numbers and commas' do
-        expect(calculator.add('1,4,')).to eq(5)
+        expect(calculator.add("1,4,")).to eq(5)
       end
   
       it 'should handle any number of integers' do
-        expect(calculator.add('1,2,3,4,5,6,7,8,9,10')).to eq(55)
+        expect(calculator.add("1,2,3,4,5,6,7,8,9,10")).to eq(55)
       end
   
       it 'should handle any number of integers with commas' do
-        expect(calculator.add('1,2,3,4,5,6,7,8,9,10,')).to eq(55)
+        expect(calculator.add("1,2,3,4,5,6,7,8,9,10,")).to eq(55)
       end
   
       it 'should handle any number of integers with new lines' do
-        expect(calculator.add('1\n2,3')).to eq(6)
+        expect(calculator.add("1\n2,3")).to eq(6)
       end
   
       it 'should handle any number of integers with new lines and commas' do
-        expect(calculator.add('1\n2,3,\n')).to eq(6)
+        expect(calculator.add("1\n2,3,\n")).to eq(6)
       end
 
       context 'negative numbers' do
         it 'should raise exception for negative numbers' do
-          expect{calculator.add('1,-2,')}.to raise_error(ArgumentError, 'negative numbers not allowed -2')
+          expect{calculator.add("1,-2,")}.to raise_error(ArgumentError, 'negative numbers not allowed -2')
         end
 
         it 'should raise exception for negative numbers' do
-          expect{calculator.add('1,-2,3')}.to raise_error(ArgumentError, 'negative numbers not allowed -2')
+          expect{calculator.add("1,-2,3")}.to raise_error(ArgumentError, 'negative numbers not allowed -2')
         end
 
         it 'should raise exception for negative numbers' do
-          expect{calculator.add('1,-2\n-3')}.to raise_error(ArgumentError, 'negative numbers not allowed -2,-3')
+          expect{calculator.add("1,-2\n-3")}.to raise_error(ArgumentError, 'negative numbers not allowed -2,-3')
         end
       end
     end
 
     context 'different delimiters' do
       it 'should support different delimiters' do
-        expect(calculator.add('//;\n1;2')).to eq(3)
+        expect(calculator.add("//;\n1;2")).to eq(3)
       end
   
       it 'should support different delimiters' do
-        expect(calculator.add('//;\n1;2;4;5;6;;')).to eq(18)
+        expect(calculator.add("//;\n1;2;4;5;6;;")).to eq(18)
       end
       
-      ['*','&','^',';','~','.'].each do |delimiter|
+      ['*','&','^',';','~','.','**','***'].each do |delimiter|
         it "should support different delimiters #{delimiter}" do
           expect(calculator.add("//#{delimiter}\n1#{delimiter}2#{delimiter}4#{delimiter}#{delimiter}")).to eq(7)
         end
-      end
 
-      context 'negative numbers' do
-        ['*','&','^',';','~','.'].each do |delimiter|
+        context 'negative numbers' do
           it "should raise exception for negative numbers" do
             expect{calculator.add("//#{delimiter}\n1#{delimiter}-2#{delimiter}4#{delimiter}#{delimiter}")}.to raise_error(ArgumentError, 'negative numbers not allowed -2')
           end
-
+    
           it "should raise exception for negative numbers" do
             expect{calculator.add("//#{delimiter}\n1#{delimiter}-2#{delimiter}4#{delimiter}-5#{delimiter}")}.to raise_error(ArgumentError, 'negative numbers not allowed -2,-5')
           end
