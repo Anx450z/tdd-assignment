@@ -15,7 +15,7 @@ String Calculator TDD Kata
 
 ## Approach
 
-I am going to follow the TDD approach for this kata. I will write the tests first and then write the code to make the tests pass which is a typical red green cycle.
+I am going to follow the TDD approach for this assignment. I will write the tests first and then write the code to make the tests pass which is a typical red green cycle.
 
 - I will use ruby to write the code.
 - Test framework will be rspec.
@@ -24,5 +24,5 @@ I am going to follow the TDD approach for this kata. I will write the tests firs
 
 ## Running the tests
 
-- bundle install
-- bundle exec rspec .
+- `bundle install`
+- `bundle exec rspec .`
