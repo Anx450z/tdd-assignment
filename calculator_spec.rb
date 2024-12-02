@@ -36,5 +36,9 @@ RSpec.describe StringCalculator do
     it 'should handle any number of integers with new lines' do
       expect(calculator.add('1\n2,3')).to eq(6)
     end
+
+    it 'should handle any number of integers with new lines and commas' do
+      expect(calculator.add('1\n2,3,\n')).to eq(6)
+    end
   end
 end
