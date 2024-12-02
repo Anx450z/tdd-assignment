@@ -21,7 +21,10 @@ class StringCalculator
   end
 
   def string_integers(string, delimiter = ',')
-    string.gsub("\n", delimiter).split(delimiter).map(&:to_i)
+    string.gsub("\n", delimiter).split(delimiter).map do |num|
+      num = num.to_i
+      num < 1000 ? num : 0
+    end
   end
 
   def validates_negative_numbers(numbers)
