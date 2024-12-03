@@ -96,6 +96,9 @@ RSpec.describe StringCalculator do
         it 'should support multiple delimiters' do
           expect(calculator.add("//[**]\n1**2**3")).to eq(6)
         end
+        it 'should support multiple delimiters *%' do
+          expect(calculator.add("//[*][%]\n1*2%3")).to eq(6)
+        end
 
         context 'negative numbers' do
           it "should raise exception for negative numbers" do
