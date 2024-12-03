@@ -4,7 +4,7 @@ class StringCalculator
     
     answer = if string.start_with?('//')
                 delimiter_part, numbers = string.split("\n",2)
-                delimiter = delimiter_part[2]
+                delimiter = parse_delimiter(delimiter_part)
                 sum_of_numbers(numbers, delimiter)
               else
                 sum_of_numbers(string)
@@ -13,6 +13,14 @@ class StringCalculator
   end
 
   private
+
+  def parse_delimiter(delimiter_part)
+    if delimiter_part[2] == '['
+      delimiter_part.scan(/\[(.+?)\]/).flatten.first
+    else
+      delimiter_part[2]
+    end
+  end
 
   def sum_of_numbers(string, delimiter = ',')
     integers = string_integers(string, delimiter)
