@@ -74,7 +74,7 @@ RSpec.describe StringCalculator do
         expect(calculator.add("//;\n1;2;4;5;6;;")).to eq(18)
       end
       
-      ['*','&','^',';','~','.','**','***'].each do |delimiter|
+      ['*','&','^',';','~','.'].each do |delimiter|
         it "should support different delimiters #{delimiter}" do
           expect(calculator.add("//#{delimiter}\n1#{delimiter}2#{delimiter}4#{delimiter}#{delimiter}")).to eq(7)
         end
@@ -86,6 +86,20 @@ RSpec.describe StringCalculator do
     
           it "should raise exception for negative numbers" do
             expect{calculator.add("//#{delimiter}\n1#{delimiter}-2#{delimiter}4#{delimiter}-5#{delimiter}")}.to raise_error(ArgumentError, 'negative numbers not allowed -2,-5')
+          end
+        end
+      end
+      context 'multiple delimiters' do
+        it 'should support multiple delimiters' do
+          expect(calculator.add("//[***]\n1***2***3")).to eq(6)
+        end
+        it 'should support multiple delimiters' do
+          expect(calculator.add("//[**]\n1**2**3")).to eq(6)
+        end
+
+        context 'negative numbers' do
+          it "should raise exception for negative numbers" do
+            expect{calculator.add("//[**]\n1**-2**3")}.to raise_error(ArgumentError, 'negative numbers not allowed -2')
           end
         end
       end
